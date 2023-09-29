@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    <bean-->
+<!--        id="inMemoryUserRepository"-->
+<!--        class="bg.softuni.repository.InMemoryUserRepository"/>-->
+
+    <bean
+        id="fileBasedUserRepository"
+        class="bg.softuni.repository.FileBasedUserRepository"/>
+
+    <bean
+        id="userService"
+        autowire="constructor"
+        class="bg.softuni.service.UserServiceImpl"/>
+
+</beans>
