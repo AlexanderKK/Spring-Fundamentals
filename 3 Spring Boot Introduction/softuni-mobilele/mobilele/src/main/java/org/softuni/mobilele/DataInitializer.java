@@ -38,21 +38,17 @@ public class DataInitializer implements CommandLineRunner {
 
             switch (input) {
                 case "1":
-                    //TODO: Seed Users
                     System.out.println(this.seedService.seedUsers());
 
                     break;
                 case "2":
-                    //TODO: Seed Brands
-
                     System.out.println(this.seedService.seedBrands());
+
                     break;
                 case "3":
-                    //TODO: Seed Models
 
                     break;
                 case "4":
-                    //TODO: Seed Offers
 
                     break;
             }
