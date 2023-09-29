@@ -8,4 +8,6 @@ public interface SeedService {
 
     String seedBrands();
 
+    String seedModels();
+
 }

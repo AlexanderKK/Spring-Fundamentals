@@ -102,4 +102,10 @@ public class ModelEntity extends BaseEntity {
         this.brand = brand;
     }
 
+    public ModelEntity create() {
+        this.setCreated(LocalDate.now());
+
+        return this;
+    }
+
 }

@@ -12,36 +12,47 @@
     <div class="container">
         <h2 class="text-center text-white m-3">All Brands</h2>
         <div class='row mb-4 d-flex justify-content-around'>
-            <div  class="brand-section col-md-5 mr-auto d-flex flex-column">
+            <div th:if="${not #lists.isEmpty(models)}" class="brand-section col-auto d-flex flex-column">
                 <h2>Car brand:
-                    <span >Brand name</span>
+                    <span th:each="model: ${models}" th:text="${model.getBrand()}">Brand name</span>
                 </h2>
                 <div>Models:
                     <table>
                         <tr>
-                            <th>No</th>
                             <th>Name</th>
                             <th>Category</th>
                             <th>Start Year</th>
                             <th>End Year</th>
                             <th>Picture</th>
                         </tr>
-                        <tr>
-                            <th>No</th>
-                            <th >Model Name</th>
-                            <th >Model Category</th>
-                            <th >Model Start Year</th>
-                            <th >Model End Year</th>
-                            <th><img alt="image" src="/3.%20Spring%20Boot%20Introduction/mobilele/src/main/resources/static"
-                                     class="img-thumbnail rounded"></th>
+                        <tr th:each="model: ${models}">
+                            <td th:text="${model.getName()}"></td>
+                            <td th:text="${model.getCategory()}"></td>
+                            <td th:text="${model.getStartYear()}"></td>
+                            <td th:text="${model.getEndYear()}"></td>
+                            <td>
+                                <img th:src="@{${model.getImageUrl()}}" alt="image" class="img-thumbnail rounded" width="200">
+<!--                                <img th:src="@{/images/{name}.jpg(name=${model.getName().toLowerCase()})}" alt="image" class="img-thumbnail rounded">-->
+<!--                                <img th:src="@{'/3.%20Spring%20Boot%20Introduction/mobilele/src/main/resources/templates/images/' + ${model.getName().toLowerCase() + '.jpg'}}" alt="image" class="img-thumbnail rounded">-->
+<!--                                <img alt="image" src="/3.%20Spring%20Boot%20Introduction/mobilele/src/main/resources/static" class="img-thumbnail rounded">-->
+                            </td>
                         </tr>
+<!--                        <tr>-->
+<!--                            <th>No</th>-->
+<!--                            <th >Model Name</th>-->
+<!--                            <th >Model Category</th>-->
+<!--                            <th >Model Start Year</th>-->
+<!--                            <th >Model End Year</th>-->
+<!--                            <th><img alt="image" src="/3.%20Spring%20Boot%20Introduction/mobilele/src/main/resources/static"-->
+<!--                                     class="img-thumbnail rounded"></th>-->
+<!--                        </tr>-->
                     </table>
                 </div>
             </div>
         </div>
 
         <div>
-                 <footer> </footer>
+                 <footer></footer>
         </div>
     </div>
 </body>

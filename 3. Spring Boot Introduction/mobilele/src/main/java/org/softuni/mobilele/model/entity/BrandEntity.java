@@ -45,4 +45,10 @@ public class BrandEntity extends BaseEntity {
         this.modified = modified;
     }
 
+    public BrandEntity create() {
+        this.setCreated(LocalDate.now());
+
+        return this;
+    }
+
 }

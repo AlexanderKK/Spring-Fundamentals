@@ -46,6 +46,7 @@ public class DataInitializer implements CommandLineRunner {
 
                     break;
                 case "3":
+                    System.out.println(this.seedService.seedModels());
 
                     break;
                 case "4":
