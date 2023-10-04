@@ -27,6 +27,7 @@ public class DataInitializer implements CommandLineRunner {
 
         while (true) {
             System.out.println("Choose option from:" +
+                    "\n0 - Exit" +
                     "\n1 - Seed Users" +
                     "\n2 - Seed Brands" +
                     "\n3 - Seed Models" +
@@ -52,6 +53,8 @@ public class DataInitializer implements CommandLineRunner {
                 case "4":
 
                     break;
+                case "0":
+                    return;
             }
 
             System.out.println("==================================");

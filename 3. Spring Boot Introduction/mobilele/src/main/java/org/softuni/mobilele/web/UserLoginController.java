@@ -25,18 +25,18 @@ public class UserLoginController {
         return "auth-login";
     }
 
-    @PostMapping("/login")
-    public String login(Model model, UserLoginDTO userLoginDTO) {
-        String loginMsg = this.userService.login(userLoginDTO);
-
-        if(loginMsg.contains("error")) {
-            model.addAttribute("isUserLogged", false);
-            model.addAttribute("message", loginMsg);
-
-            return "auth-login";
-        }
+    @GetMapping("/logout")
+    public String logout() {
+        this.userService.logout();
 
         return "redirect:/";
+    }
+
+    @PostMapping("/login")
+    public String login(UserLoginDTO userLoginDTO) {
+        boolean loginSuccessful = userService.login(userLoginDTO);
+
+        return loginSuccessful ? "redirect:/" : "auth-login";
     }
 
 }

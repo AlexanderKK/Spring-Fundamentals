@@ -112,7 +112,6 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity createUser() {
         this.setCreated(LocalDate.now());
-        this.setIsActive(Boolean.TRUE);
 
         return this;
     }

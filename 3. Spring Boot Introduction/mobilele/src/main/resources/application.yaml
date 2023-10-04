@@ -2,9 +2,9 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mobilele?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-    username: root
-    password: impeachment*
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/${MYSQL_DATABASE_NAME}?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: ${MYSQL_USER:}
+    password: ${MYSQL_PASSWORD:}
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
@@ -12,6 +12,7 @@ spring:
   sql:
     init:
       mode: never
+
 logging:
   level:
     ROOT: WARN
@@ -19,3 +20,5 @@ logging:
 #    guru.springframework.controllers: DEBUG
 #    org.hibernate: DEBUG
 #    org: INFO
+
+#default.db.password: ${DEFAULT_DB_PASSWORD:topsecret}

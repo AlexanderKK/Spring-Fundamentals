@@ -13,6 +13,9 @@ public class UserRegistrationDTO extends UserDTO {
     @NotBlank
     private String password;
 
+    @NotBlank
+    private String confirmPassword;
+
     public UserRegistrationDTO() {}
 
     public String getFirstName() {
@@ -37,6 +40,14 @@ public class UserRegistrationDTO extends UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
 }
