@@ -3,7 +3,7 @@ package org.softuni.mobilele.service.impl;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.softuni.mobilele.model.dto.BrandJsonDTO;
-import org.softuni.mobilele.model.dto.ModelDTO;
+import org.softuni.mobilele.model.dto.BrandModelDTO;
 import org.softuni.mobilele.model.dto.UserJsonDTO;
 import org.softuni.mobilele.model.entity.BrandEntity;
 import org.softuni.mobilele.model.entity.ModelEntity;
@@ -159,28 +159,28 @@ public class SeedServiceImpl implements SeedService {
 
         BufferedReader readModels = readFileFromResources(MODELS_JSON_FILENAME);
 
-        ModelDTO[] modelJsonDTOs = this.gson.fromJson(readModels, ModelDTO[].class);
+        BrandModelDTO[] brandModelDTOS = this.gson.fromJson(readModels, BrandModelDTO[].class);
 
         StringBuilder sb = new StringBuilder();
 
-        for (ModelDTO modelDTO : modelJsonDTOs) {
+        for (BrandModelDTO brandModelDTO : brandModelDTOS) {
             CategoryEnum categoryEnum;
             try {
-                categoryEnum = CategoryEnum.valueOf(modelDTO.getCategory().toUpperCase());
+                categoryEnum = CategoryEnum.valueOf(brandModelDTO.getCategory().toUpperCase());
             } catch (RuntimeException ignored) {
                 sb.append(String.format(INVALID_ENTITY, "category")).append(System.lineSeparator());
                 continue;
             }
 
-            Optional<BrandEntity> brand = this.getBrandByName(modelDTO.getBrand());
+            Optional<BrandEntity> brand = this.getBrandByName(brandModelDTO.getBrand());
             if (brand.isEmpty()) {
                 sb.append(String.format(INVALID_ENTITY, "brand")).append(System.lineSeparator());
                 continue;
             }
 
-            boolean isModelValid = this.validator.isValid(modelDTO);
+            boolean isModelValid = this.validator.isValid(brandModelDTO);
             if(isModelValid) {
-                ModelEntity model = this.mapper.map(modelDTO, ModelEntity.class);
+                ModelEntity model = this.mapper.map(brandModelDTO, ModelEntity.class);
 
                 model.setCategory(categoryEnum);
 
@@ -189,7 +189,7 @@ public class SeedServiceImpl implements SeedService {
                 this.modelRepository.saveAndFlush(model.create());
             }
 
-            appendValidationMsg(sb, String.format("%s %s", modelDTO.getBrand(), modelDTO.getName()), isModelValid);
+            appendValidationMsg(sb, String.format("%s %s", brandModelDTO.getBrand(), brandModelDTO.getName()), isModelValid);
         }
 
         if(!sb.toString().contains("Invalid")) {

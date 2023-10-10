@@ -1,6 +1,6 @@
 package org.softuni.mobilele.web;
 
-import org.softuni.mobilele.model.dto.ModelDTO;
+import org.softuni.mobilele.model.dto.BrandModelDTO;
 import org.softuni.mobilele.service.ModelService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ public class BrandController {
 
     @GetMapping("/brands/all")
     public String index(Model model) {
-        List<ModelDTO> modelsPerBrand = this.modelService.getModelsPerBrand();
+        List<BrandModelDTO> modelsPerBrand = this.modelService.getModelsPerBrand();
 
         model.addAttribute("models", modelsPerBrand);
 

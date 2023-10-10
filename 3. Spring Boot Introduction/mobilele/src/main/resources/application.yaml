@@ -2,16 +2,21 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/${MYSQL_DATABASE_NAME}?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/mobilele?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
     username: ${MYSQL_USER:}
     password: ${MYSQL_PASSWORD:}
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
   sql:
     init:
       mode: never
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
 
 logging:
   level:

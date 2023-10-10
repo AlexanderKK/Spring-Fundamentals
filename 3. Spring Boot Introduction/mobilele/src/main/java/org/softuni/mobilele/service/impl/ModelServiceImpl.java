@@ -1,7 +1,7 @@
 package org.softuni.mobilele.service.impl;
 
 import org.modelmapper.ModelMapper;
-import org.softuni.mobilele.model.dto.ModelDTO;
+import org.softuni.mobilele.model.dto.BrandModelDTO;
 import org.softuni.mobilele.model.entity.ModelEntity;
 import org.softuni.mobilele.repository.ModelRepository;
 import org.softuni.mobilele.service.ModelService;
@@ -23,16 +23,16 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<ModelDTO> getModelsPerBrand() {
+    public List<BrandModelDTO> getModelsPerBrand() {
         List<ModelEntity> models = this.modelRepository.findAll();
 
         return models.stream()
                 .map(model -> {
-                    ModelDTO modelDTO = mapper.map(model, ModelDTO.class);
+                    BrandModelDTO brandModelDTO = mapper.map(model, BrandModelDTO.class);
 
-                    modelDTO.setBrand(model.getBrand().getName());
+                    brandModelDTO.setBrand(model.getBrand().getName());
 
-                    return modelDTO;
+                    return brandModelDTO;
                 })
                 .toList();
     }
