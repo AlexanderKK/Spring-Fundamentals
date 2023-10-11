@@ -1,13 +1,16 @@
 package org.softuni.mobilele.web;
 
+import jakarta.validation.Valid;
 import org.softuni.mobilele.model.dto.UserRegistrationDTO;
 import org.softuni.mobilele.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users")
@@ -20,27 +23,29 @@ public class UserRegisterController {
     }
 
     @GetMapping("/register")
-    public String index() {
+    public String index(Model model) {
+        if(!model.containsAttribute("userRegistrationDTO")) {
+            model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
+        }
+
         return "auth-register";
     }
 
     @PostMapping("/register")
-    public String register(UserRegistrationDTO userRegistrationDTO, Model model) {
-        String registrationMsg = this.userService.register(userRegistrationDTO);
+    public String register(@Valid UserRegistrationDTO userRegistrationDTO,
+                           BindingResult bindingResult,
+                           RedirectAttributes rAtt) {
+        if(bindingResult.hasErrors()) {
+            rAtt.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
+            rAtt.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
 
-        if(registrationMsg.contains("success")) {
-            return "redirect:/";
+            return "redirect:/users/register";
         }
 
-        if(registrationMsg.endsWith("already registered")) {
-            model.addAttribute("isUserPresent", true);
-        } else if(registrationMsg.startsWith("Invalid")) {
-            model.addAttribute("isUserInvalid", true);
-        }
+        this.userService.register(userRegistrationDTO);
 
-        model.addAttribute("message", registrationMsg);
-
-        return "auth-register";
+        return "redirect:/users/login";
     }
 
 }

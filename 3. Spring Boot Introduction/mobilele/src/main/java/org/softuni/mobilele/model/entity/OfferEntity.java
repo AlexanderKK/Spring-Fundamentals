@@ -1,7 +1,7 @@
 package org.softuni.mobilele.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.softuni.mobilele.model.entity.enums.EngineEnum;
 import org.softuni.mobilele.model.entity.enums.TransmissionEnum;
@@ -15,38 +15,52 @@ import java.util.UUID;
 @Table(name = "offers")
 public class OfferEntity extends BaseEntity {
 
+    @NotNull
     @JdbcTypeCode(Types.VARCHAR)
     private UUID uuid;
 
+    @NotEmpty
+    @Size(min = 5, max = 512)
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @NotNull
     @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private EngineEnum engine;
 
+    @NotEmpty
     @Column(name = "image_url")
     private String imageUrl;
 
+    @NotNull
+    @Positive
     @Column(nullable = false)
     private Integer mileage;
 
+    @NotNull
+    @Positive
     @Column(nullable = false)
     private BigDecimal price;
 
+    @NotNull
     @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private TransmissionEnum transmission;
 
+    @NotNull
+    @Min(1930)
     @Column(nullable = false)
     private Integer year;
 
+    @NotNull
     @Column(nullable = false)
     private LocalDate created;
 
     @Column
     private LocalDate modified;
 
+    @NotNull
     @ManyToOne
     private ModelEntity model;
 

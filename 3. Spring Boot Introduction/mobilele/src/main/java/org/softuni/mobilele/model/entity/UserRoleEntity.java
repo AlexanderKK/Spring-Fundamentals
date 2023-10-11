@@ -10,7 +10,7 @@ import org.softuni.mobilele.model.entity.enums.UserRoleEnum;
 public class UserRoleEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private UserRoleEnum role;
 
     public UserRoleEntity() {}

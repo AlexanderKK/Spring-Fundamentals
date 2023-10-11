@@ -14,7 +14,7 @@ public class ModelEntity extends BaseEntity {
     private String name;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private CategoryEnum category;
 
     @Column(name = "image_url")

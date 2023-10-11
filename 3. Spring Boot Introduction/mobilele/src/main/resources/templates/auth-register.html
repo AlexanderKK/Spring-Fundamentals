@@ -5,49 +5,42 @@
 
 <body>
 
-    <div>
-        <nav th:replace="~{fragments/navbar}"></nav>
-    </div>
+    <nav th:replace="~{fragments/navbar}"></nav>
 
     <div class="container">
         <h2 class="text-center text-white">Register User</h2>
 
         <form
                 th:action="@{/users/register}"
-                th:method="DELETE"
+                th:method="POST"
+                th:object="${userRegistrationDTO}"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
             <div class="row">
-                <th:block th:if="${isUserPresent}">
-                    <div class="form-group col-md-12 mb-3">
-                        <h5 class="text-center text-danger" th:text="${message}"></h5>
-                    </div>
-                </th:block>
-
-                <th:block th:if="${isUserInvalid}">
-                    <div class="form-group col-md-12 mb-3">
-                        <h5 class="text-center text-danger" th:text="${message}"></h5>
-                    </div>
-                </th:block>
-
                 <div class="form-group col-md-6 mb-3">
                     <label for="firstName" class="text-white font-weight-bold">First Name</label>
 
-                    <input name="firstName" id="firstName" type="text" min="2" max="20" class="form-control"
+                    <input th:name="firstName"
+                           th:field="*{firstName}"
+                           id="firstName" type="text" min="2" max="20" class="form-control"
                            placeholder="First name"/>
 
-                    <p class="errors alert alert-danger">
-                        First name is required.
+                    <p class="errors alert alert-danger"
+                       th:if="${#fields.hasErrors('firstName')}"
+                       th:errors="*{firstName}">
                     </p>
                 </div>
 
                 <div class="form-group col-md-6 mb-3">
                     <label for="lastName" class="text-white font-weight-bold">Last Name</label>
 
-                    <input name="lastName" id="lastName" type="text" min="2" max="20" class="form-control"
+                    <input th:name="lastName"
+                           th:field="*{lastName}"
+                           id="lastName" type="text" min="2" max="20" class="form-control"
                            placeholder="Last name"/>
 
-                    <p class="errors alert alert-danger">
-                        Last name is required.
+                    <p class="errors alert alert-danger"
+                       th:if="${#fields.hasErrors('lastName')}"
+                       th:errors="*{lastName}">
                     </p>
                 </div>
             </div>
@@ -56,33 +49,42 @@
                 <div class="form-group col-md-12 mb-3">
                     <label for="email" class="text-white font-weight-bold">Email</label>
 
-                    <input name="email" id="email" type="text" min="2" max="20" class="form-control"
+                    <input th:name="email"
+                           th:field="*{email}"
+                           id="email" type="text" min="2" max="20" class="form-control"
                            placeholder="Email"/>
 
-                    <p class="errors alert alert-danger">
-                        Email is required.
+                    <p class="errors alert alert-danger"
+                       th:if="${#fields.hasErrors('email')}"
+                       th:errors="*{email}">
                     </p>
                 </div>
 
                 <div class="form-group col-md-6 mb-3">
                     <label for="password" class="text-white font-weight-bold">Password</label>
 
-                    <input name="password" id="password" type="password" min="2" max="20" class="form-control"
+                    <input th:name="password"
+                           th:field="*{password}"
+                           id="password" type="password" min="2" max="20" class="form-control"
                            placeholder="Password"/>
 
-                    <p class="errors alert alert-danger">
-                        Password is required.
+                    <p class="errors alert alert-danger"
+                       th:if="${#fields.hasErrors('password')}"
+                       th:errors="*{password}">
                     </p>
                 </div>
 
                 <div class="form-group col-md-6 mb-3">
                     <label for="confirm-password" class="text-white font-weight-bold">Confirm Password</label>
 
-                    <input name="confirmPassword" id="confirm-password" type="password" min="2" max="20" class="form-control"
+                    <input th:name="confirmPassword"
+                           th:field="*{confirmPassword}"
+                           id="confirm-password" type="password" min="2" max="20" class="form-control"
                            placeholder="Confirm Password"/>
 
-                    <p class="errors alert alert-danger">
-                        Password confirmation is required.
+                    <p class="errors alert alert-danger"
+                       th:if="${#fields.hasErrors('confirmPassword')}"
+                       th:errors="*{confirmPassword}">
                     </p>
                 </div>
             </div>

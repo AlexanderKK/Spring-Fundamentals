@@ -35,22 +35,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String register(UserRegistrationDTO userRegistrationDTO) {
-        boolean isUserPresent = this.userRepository.findByEmail(userRegistrationDTO.getEmail()).isPresent();
-        if(isUserPresent ||
-                !userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword()) ||
-                !validator.isValid(userRegistrationDTO)) {
-            return "Invalid User";
-        }
-
+    public void register(UserRegistrationDTO userRegistrationDTO) {
         UserEntity user = mapper.map(userRegistrationDTO, UserEntity.class);
 
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
         this.userRepository.save(user.createUser());
-
-        return "User registered successfully";
     }
 
     @Override

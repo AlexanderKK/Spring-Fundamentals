@@ -5,7 +5,7 @@ import org.softuni.mobilele.model.dto.UserRegistrationDTO;
 
 public interface UserService {
 
-    String register(UserRegistrationDTO userRegistrationDTO);
+    void register(UserRegistrationDTO userRegistrationDTO);
 
     boolean login(UserLoginDTO userLoginDTO);
 

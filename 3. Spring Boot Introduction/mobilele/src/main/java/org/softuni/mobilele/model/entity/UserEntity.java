@@ -1,7 +1,11 @@
 package org.softuni.mobilele.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
+import org.softuni.mobilele.model.validation.UniqueUserEmail;
 
 import java.time.LocalDate;
 
@@ -9,18 +13,25 @@ import java.time.LocalDate;
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
 
+    @Email(message = "Email should be valid!")
+    @NotBlank(message = "Email should not be empty!")
+    @UniqueUserEmail
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NotBlank(message = "Password should not be empty!")
     @Column(nullable = false)
     private String password;
 
+    @NotBlank(message = "First name should not be empty!")
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @NotBlank(message = "Last name should not be empty!")
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @NotNull
     @Column(name = "is_active")
     private Boolean isActive = Boolean.FALSE;
 
@@ -30,6 +41,7 @@ public class UserEntity extends BaseEntity {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @NotNull
     @Column(nullable = false)
     private LocalDate created;
 
